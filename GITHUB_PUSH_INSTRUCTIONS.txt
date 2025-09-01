@@ -32,8 +32,8 @@ git commit -m "🚀 CruxAGI-AVI: Enterprise AI with 70% performance lift"
 git push origin main
 
 Credentials:
-Username: dkidwell@dgisupply.com  
-Token: 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
+Username: 
+Token: 
 
 FILES TO INCLUDE:
 ✅ Dockerfile (production-ready)
