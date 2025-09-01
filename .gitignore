@@ -1,0 +1,110 @@
+# ---------------------------
+# Athena AI Gen1 .gitignore
+# ---------------------------
+
+# Node & TypeScript
+node_modules/
+dist/
+coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript build artifacts
+*.tsbuildinfo
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.swm
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Backups
+*.backup
+_last_backup_path
+
+# Cache directories
+.steno_cache/
+.test_steno_cache/
+.cache/
+.tmp/
+logs/
+storage/
+screenshots/
+
+# Legacy AgentForged / migration junk
+adapters/
+agent-zero/
+attached_assets/
+Unnecessary AgentForged Files/
+docs/
+helm/
+knowledge/
+shared/
+scripts/
+
+# Debug / patch scripts
+debug-*.cjs
+fix-*.cjs
+generate-*.js
+demo-compression.ts
+
+# Archives & dumps
+*.tar.gz
+*.zip
+*.bak
+
+# Python stubs (not used in Gen1 core)
+*.pyc
+__pycache__/
+start_websocket.py
+
+# Replit & cloud IDE metadata
+.replit
+replit.md
+
+# Local test/demo files
+test-*.ts
+test-*.cjs
+test-*.js
+
+# ================================
+# DEPLOYMENT & PRODUCTION CONFIGS
+# ================================
+
+# Docker secrets and volumes
+docker-compose.override.yml
+.env.docker
+.env.production
+.env.staging
+
+# Kubernetes secrets
+deployment/secrets.yml
+deployment/*-secret.yml
+
+# Production data
+postgres_data/
+redis_data/
+prometheus_data/
+grafana_data/
+
+# Build artifacts for deployment
+*.tar
+*.tgz
+build-output/
+
+# GitHub deployment artifacts  
+.github/deployment-*
+deployment-logs/

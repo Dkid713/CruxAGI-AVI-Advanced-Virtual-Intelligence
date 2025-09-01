@@ -1,0 +1,242 @@
+{
+  "pol-2.1.0-gen3-1756708888063-1756708888065": {
+    "pack": {
+      "pack_id": "pol-2.1.0-gen3-1756708888063-1756708888065",
+      "source_patterns": [
+        "be37cd0d8e3983ab"
+      ],
+      "rules": [
+        {
+          "id": "342349af-3e7a-45bd-83c2-de6cac9c63f1",
+          "description": "Prefer compressed symbol for invariant: Compression patterns emerge through repetitive linguistic structures",
+          "match": {
+            "type": "symbol",
+            "value": "be37cd0d8e3983ab"
+          },
+          "action": {
+            "type": "rewrite",
+            "value": "[be37cd0d8e3983ab]"
+          },
+          "expected_lift": 0.11199999999999999,
+          "risk": "low"
+        },
+        {
+          "id": "ad625359-4203-42d7-affe-446ac1687fb2",
+          "description": "Route intents aligned with Compression patterns emerge through repetitive linguistic structures to Gen1 micro-skill",
+          "match": {
+            "type": "route",
+            "value": "Compression patterns emerge through repetitive linguistic structures"
+          },
+          "action": {
+            "type": "route",
+            "value": "gen1.skill.skill_v2"
+          },
+          "expected_lift": 0.05,
+          "risk": "med"
+        }
+      ],
+      "provenance": {
+        "gen2_version": "2.1.0",
+        "gen3_snapshot": "gen3-1756708888063",
+        "created_at": "2025-09-01T06:41:28.065Z"
+      },
+      "safeguards": {
+        "no_gen1_to_gen3": true,
+        "dry_run_default": true,
+        "auto_revert_on_regression": true
+      }
+    },
+    "status": "canary",
+    "rollout_percentage": 10,
+    "activation_time": "2025-09-01T06:41:28.212Z",
+    "metrics": {
+      "lift": 0,
+      "last_checked": "2025-09-01T06:41:28.212Z"
+    }
+  },
+  "pol-2.1.0-gen3-1756708916053-1756708916058": {
+    "pack": {
+      "pack_id": "pol-2.1.0-gen3-1756708916053-1756708916058",
+      "source_patterns": [
+        "be37cd0d8e3983ab"
+      ],
+      "rules": [
+        {
+          "id": "bedad98c-f829-4461-a758-2a7787f8ab8a",
+          "description": "Prefer compressed symbol for invariant: Compression patterns emerge through repetitive linguistic structures",
+          "match": {
+            "type": "symbol",
+            "value": "be37cd0d8e3983ab"
+          },
+          "action": {
+            "type": "rewrite",
+            "value": "[be37cd0d8e3983ab]"
+          },
+          "expected_lift": 0.11199999999999999,
+          "risk": "low"
+        },
+        {
+          "id": "490370e2-b1c7-43ab-9e62-62b2df8acf41",
+          "description": "Route intents aligned with Compression patterns emerge through repetitive linguistic structures to Gen1 micro-skill",
+          "match": {
+            "type": "route",
+            "value": "Compression patterns emerge through repetitive linguistic structures"
+          },
+          "action": {
+            "type": "route",
+            "value": "gen1.skill.skill_v2"
+          },
+          "expected_lift": 0.05,
+          "risk": "med"
+        }
+      ],
+      "provenance": {
+        "gen2_version": "2.1.0",
+        "gen3_snapshot": "gen3-1756708916053",
+        "created_at": "2025-09-01T06:41:56.058Z"
+      },
+      "safeguards": {
+        "no_gen1_to_gen3": true,
+        "dry_run_default": true,
+        "auto_revert_on_regression": true
+      }
+    },
+    "status": "canary",
+    "rollout_percentage": 10,
+    "activation_time": "2025-09-01T06:41:56.222Z",
+    "metrics": {
+      "lift": 0,
+      "last_checked": "2025-09-01T06:41:56.222Z"
+    }
+  },
+  "pol-2.1.0-gen3-1756708939122-1756708939124": {
+    "pack": {
+      "pack_id": "pol-2.1.0-gen3-1756708939122-1756708939124",
+      "source_patterns": [
+        "be37cd0d8e3983ab"
+      ],
+      "rules": [],
+      "provenance": {
+        "gen2_version": "2.1.0",
+        "gen3_snapshot": "gen3-1756708939122",
+        "created_at": "2025-09-01T06:42:19.124Z"
+      },
+      "safeguards": {
+        "no_gen1_to_gen3": true,
+        "dry_run_default": true,
+        "auto_revert_on_regression": true
+      }
+    },
+    "status": "canary",
+    "rollout_percentage": 10,
+    "activation_time": "2025-09-01T06:42:19.265Z",
+    "metrics": {
+      "lift": 0,
+      "last_checked": "2025-09-01T06:42:19.265Z"
+    }
+  },
+  "pol-2.1.0-gen3-1756709181562-1756709181563": {
+    "pack": {
+      "pack_id": "pol-2.1.0-gen3-1756709181562-1756709181563",
+      "source_patterns": [
+        "be37cd0d8e3983ab"
+      ],
+      "rules": [],
+      "provenance": {
+        "gen2_version": "2.1.0",
+        "gen3_snapshot": "gen3-1756709181562",
+        "created_at": "2025-09-01T06:46:21.563Z"
+      },
+      "safeguards": {
+        "no_gen1_to_gen3": true,
+        "dry_run_default": true,
+        "auto_revert_on_regression": true
+      }
+    },
+    "status": "canary",
+    "rollout_percentage": 10,
+    "activation_time": "2025-09-01T06:46:21.695Z",
+    "metrics": {
+      "lift": 0,
+      "last_checked": "2025-09-01T06:46:21.695Z"
+    }
+  },
+  "pol-2.1.0-gen3-1756709196181-1756709196184": {
+    "pack": {
+      "pack_id": "pol-2.1.0-gen3-1756709196181-1756709196184",
+      "source_patterns": [
+        "be37cd0d8e3983ab"
+      ],
+      "rules": [],
+      "provenance": {
+        "gen2_version": "2.1.0",
+        "gen3_snapshot": "gen3-1756709196181",
+        "created_at": "2025-09-01T06:46:36.184Z"
+      },
+      "safeguards": {
+        "no_gen1_to_gen3": true,
+        "dry_run_default": true,
+        "auto_revert_on_regression": true
+      }
+    },
+    "status": "canary",
+    "rollout_percentage": 10,
+    "activation_time": "2025-09-01T06:46:36.341Z",
+    "metrics": {
+      "lift": 0,
+      "last_checked": "2025-09-01T06:46:36.341Z"
+    }
+  },
+  "pol-2.1.0-gen3-1756709248027-1756709248028": {
+    "pack": {
+      "pack_id": "pol-2.1.0-gen3-1756709248027-1756709248028",
+      "source_patterns": [
+        "be37cd0d8e3983ab"
+      ],
+      "rules": [],
+      "provenance": {
+        "gen2_version": "2.1.0",
+        "gen3_snapshot": "gen3-1756709248027",
+        "created_at": "2025-09-01T06:47:28.028Z"
+      },
+      "safeguards": {
+        "no_gen1_to_gen3": true,
+        "dry_run_default": true,
+        "auto_revert_on_regression": true
+      }
+    },
+    "status": "canary",
+    "rollout_percentage": 10,
+    "activation_time": "2025-09-01T06:47:28.170Z",
+    "metrics": {
+      "lift": 0,
+      "last_checked": "2025-09-01T06:47:28.170Z"
+    }
+  },
+  "pol-2.1.0-gen3-1756709299633-1756709299636": {
+    "pack": {
+      "pack_id": "pol-2.1.0-gen3-1756709299633-1756709299636",
+      "source_patterns": [
+        "be37cd0d8e3983ab"
+      ],
+      "rules": [],
+      "provenance": {
+        "gen2_version": "2.1.0",
+        "gen3_snapshot": "gen3-1756709299633",
+        "created_at": "2025-09-01T06:48:19.636Z"
+      },
+      "safeguards": {
+        "no_gen1_to_gen3": true,
+        "dry_run_default": true,
+        "auto_revert_on_regression": true
+      }
+    },
+    "status": "canary",
+    "rollout_percentage": 10,
+    "activation_time": "2025-09-01T06:48:19.777Z",
+    "metrics": {
+      "lift": 0,
+      "last_checked": "2025-09-01T06:48:19.777Z"
+    }
+  }
+}

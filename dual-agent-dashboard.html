@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CruxAGI × Athena — Dual-Agent A/B Testing Dashboard</title>
+  <style>
+    :root{
+      --bg:#0b0f14; --card:#111823; --muted:#8292a6; --text:#e7eef7; --accent:#6ee7ff; --accent2:#7ee787; --warn:#ffcc66; --bad:#ff6b6b;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; padding:24px; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(110,231,255,.08), transparent),
+                  radial-gradient(1000px 600px at 100% 10%, rgba(126,231,135,.07), transparent),
+                  var(--bg);
+      color:var(--text);
+    }
+    h1{font-size:24px;margin:0 0 18px;letter-spacing:.3px}
+    .sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+    .wrap{max-width:1100px;margin:0 auto}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    textarea{width:100%;min-height:110px;border-radius:12px;padding:12px;background:#0d141e;color:var(--text);
+      border:1px solid rgba(255,255,255,.08);resize:vertical}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
+    button{
+      background:linear-gradient(180deg, #1f2937, #101827);
+      color:#eaf6ff;border:1px solid rgba(255,255,255,.08);
+      padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:600;letter-spacing:.2px
+    }
+    button.primary{background:linear-gradient(180deg, #0ea5e9, #0369a1); border-color:#0284c7}
+    button.green{background:linear-gradient(180deg, #16a34a, #166534); border-color:#16a34a}
+    button:disabled{opacity:.6;cursor:not-allowed}
+    .metrics{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+    .pill{padding:6px 10px;border:1px solid rgba(255,255,255,.1);border-radius:999px;color:var(--muted);font-size:12px;background:#0e1622}
+    .pill.cost{background:#16213e;border-color:#1e40af;color:#bfdbfe}
+    .pill.tokens{background:#134e4a;border-color:#059669;color:#a7f3d0}
+    .result{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .agent{position:relative;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.06);border-radius:var(--radius)}
+    .agent h3{margin:0 0 6px}
+    .scorebar{height:10px;background:#0f1723;border-radius:999px;overflow:hidden;margin:8px 0 10px;border:1px solid rgba(255,255,255,.06)}
+    .scorebar > div{height:100%;background:linear-gradient(90deg, var(--accent), var(--accent2))}
+    .muted{color:var(--muted);font-size:12px}
+    details{margin-top:10px}
+    summary{cursor:pointer}
+    .winner{position:absolute;right:12px;top:12px;font-size:12px;padding:6px 10px;border-radius:999px;
+      background:linear-gradient(180deg,#22c55e,#15803d);border:1px solid #22c55e;color:#04130a}
+    .loser{position:absolute;right:12px;top:12px;font-size:12px;padding:6px 10px;border-radius:999px;
+      background:linear-gradient(180deg,#1f2937,#0f172a);border:1px solid rgba(255,255,255,.1);color:#9fb1c7}
+    .footer{margin-top:24px;color:#7f90a5;font-size:12px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:12px}
+    .realtime{background:#1a2332;border:1px solid #334155;border-radius:12px;padding:12px;margin-top:16px}
+    .realtime h4{margin:0 0 8px;color:var(--accent);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>CruxAGI × Athena — Dual-Agent A/B Testing Dashboard</h1>
+    <div class="sub">Hit your live API (<span class="mono">/api/athena/dual-agent-pro/simulate</span>) and compare agents with real OpenAI costs & tokens.</div>
+
+    <div class="card">
+      <label for="endpoint" class="muted">API base URL</label>
+      <input id="endpoint" style="width:100%;margin:6px 0 12px;padding:10px;border-radius:12px;background:#0d141e;color:var(--text);border:1px solid rgba(255,255,255,.08)" value="http://localhost:5000/api/athena/dual-agent-pro" />
+
+      <div class="grid">
+        <div>
+          <label for="prompt" class="muted">Prompt</label>
+          <textarea id="prompt">Outline our Sunnen deep-hole launch plan in 6 bullets with KPIs and risks.</textarea>
+          <div class="row">
+            <button class="primary" id="runSim">🧪 Run A/B Test</button>
+            <button id="runAthena">Athena only</button>
+            <button class="green" id="runCrux">CruxAGI only</button>
+          </div>
+          <div class="metrics" id="meta"></div>
+        </div>
+        <div>
+          <div class="pill">💡 Latency includes real OpenAI calls + evaluation</div>
+          <div style="margin-top:8px" class="muted">Winner is chosen by average score (accuracy, completeness, professionalism).</div>
+          <div class="realtime">
+            <h4>🔗 Live Data Sources</h4>
+            <div class="muted" style="font-size:11px">
+              • OpenAI API (GPT-4o-mini/GPT-4o)<br>
+              • Real token counting & cost calculation<br>
+              • LLM-powered quality evaluation<br>
+              • Domain routing with embeddings
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result" id="result" style="display:none"></div>
+    </div>
+
+    <div class="footer">If the request fails, verify your server is running and the endpoint matches the base URL above. All data comes from live API calls - no mocking.</div>
+  </div>
+
+  <script>
+    const el = (id)=>document.getElementById(id);
+    const fmt = (n)=> typeof n==="number" ? n.toFixed(2) : n;
+    const fmtCost = (n)=> typeof n==="number" ? `$${n.toFixed(6)}` : n;
+    const fmtTokens = (n)=> typeof n==="number" ? `${n.toLocaleString()} tokens` : n;
+    
+    function scoreBlock(title, data, isWinner, costData = {}){
+      const pct = Math.max(0, Math.min(100, (data.scores.avg/10)*100));
+      const badge = isWinner ? '<div class="winner">🏆 Winner</div>' : '<div class="loser">Runner-up</div>';
+      const costPill = costData.cost ? `<span class="pill cost">💰 ${fmtCost(costData.cost)}</span>` : '';
+      const tokenPill = costData.tokens ? `<span class="pill tokens">🔢 ${fmtTokens(costData.tokens)}</span>` : '';
+      
+      return `
+      <div class="agent">
+        ${badge}
+        <h3>${title}</h3>
+        <div class="muted">Model: ${data.model || "—"}</div>
+        <div class="scorebar"><div style="width:${pct}%"></div></div>
+        <div class="muted">Avg: <b>${fmt(data.scores.avg)}</b> — Acc ${fmt(data.scores.accuracy)} • Comp ${fmt(data.scores.completeness)} • Pro ${fmt(data.scores.professionalism)}</div>
+        <div style="margin-top:8px">${costPill} ${tokenPill}</div>
+        <details>
+          <summary>Show answer</summary>
+          <pre class="mono" style="white-space:pre-wrap">${escapeHtml(data.answer || data.content || "")}</pre>
+        </details>
+      </div>`;
+    }
+    function escapeHtml(s){ return s.replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+
+    async function call(path, body){
+      const base = el('endpoint').value.replace(/\/$/,''); 
+      const t0 = performance.now();
+      const res = await fetch(base + path, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const t1 = performance.now();
+      const json = await res.json();
+      return { json, ms: Math.max(1, t1 - t0) };
+    }
+
+    async function runSim(){
+      disable(true);
+      const prompt = el('prompt').value.trim();
+      el('meta').innerHTML = `<span class="pill">🧪 Running A/B test...</span>`;
+      try{
+        const { json, ms } = await call('/simulate', { prompt });
+        const { result } = json;
+        const a = result.athena, c = result.cruxagi;
+        const winner = (a.scores.avg >= c.scores.avg) ? 'athena' : 'cruxagi';
+        
+        el('result').style.display = 'grid';
+        el('result').innerHTML = scoreBlock('Athena AV1', a, winner==='athena', {cost: a.cost_usd, tokens: a.tokens_used}) + 
+                                scoreBlock('CruxAGI AV1', c, winner==='cruxagi', {cost: c.cost_usd, tokens: c.tokens_used});
+        
+        el('meta').innerHTML = `<span class="pill">🎯 Domain: ${result.domain || '—'}</span>
+                                <span class="pill">🏆 Winner: ${winner}</span>
+                                <span class="pill cost">💰 Total: ${fmtCost(result.total_cost_usd)}</span>
+                                <span class="pill tokens">🔢 Total: ${fmtTokens(result.total_tokens)}</span>
+                                <span class="pill">⏱️ ${ms.toFixed(0)}ms</span>`;
+      } catch(e){
+        el('meta').innerHTML = `<span class="pill" style="background:#2a1320;border-color:#b91c1c;color:#fca5a5">❌ Error: ${escapeHtml(String(e))}</span>`;
+      } finally{ disable(false); }
+    }
+
+    async function runSingle(which){
+      disable(true);
+      const prompt = el('prompt').value.trim();
+      el('meta').innerHTML = `<span class="pill">Running ${which}...</span>`;
+      try{
+        const { json, ms } = await call('/answer', { prompt });
+        const { result } = json;
+        const agent = result.agent || (which==='athena'?'athena-av1':'cruxagi-av1');
+        const block = { 
+          model: result.model, 
+          scores: result.scores, 
+          answer: result.answer 
+        };
+        
+        el('result').style.display = 'grid';
+        el('result').innerHTML = scoreBlock(agent === 'athena-av1' ? 'Athena AV1' : 'CruxAGI AV1', block, true, {cost: result.cost_usd, tokens: result.tokens_used});
+        
+        el('meta').innerHTML = `<span class="pill">🤖 Agent: ${result.agent}</span>
+                                <span class="pill">🎯 Domain: ${result.domain || '—'}</span>
+                                <span class="pill cost">💰 ${fmtCost(result.cost_usd)}</span>
+                                <span class="pill tokens">🔢 ${fmtTokens(result.tokens_used)}</span>
+                                <span class="pill">⏱️ ${ms.toFixed(0)}ms</span>`;
+      } catch(e){
+        el('meta').innerHTML = `<span class="pill" style="background:#2a1320;border-color:#b91c1c;color:#fca5a5">❌ Error: ${escapeHtml(String(e))}</span>`;
+      } finally{ disable(false); }
+    }
+
+    function disable(flag){
+      el('runSim').disabled = flag;
+      el('runAthena').disabled = flag;
+      el('runCrux').disabled = flag;
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      el('runSim').addEventListener('click', runSim);
+      el('runAthena').addEventListener('click', ()=> runSingle('athena'));
+      el('runCrux').addEventListener('click', ()=> runSingle('crux'));
+    });
+  </script>
+</body>
+</html>

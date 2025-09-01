@@ -1,0 +1,48 @@
+🚀 GITHUB DEPLOYMENT INSTRUCTIONS
+=====================================
+
+Repository: https://github.com/Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence
+
+OPTION 1: Using GitHub CLI (Recommended)
+----------------------------------------
+cd ~/cruxagi
+gh auth login
+gh repo clone Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence
+cd CruxAGI-AVI-Advanced-Virtual-Intelligence
+
+# Copy all files from Replit workspace
+cp -r /path/to/replit/workspace/* .
+
+git add .
+git commit -m "🚀 Initial deployment: Athena AGI with enterprise features"
+git push origin main
+
+OPTION 2: Direct Git Commands
+-----------------------------
+git clone https://github.com/Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence.git
+cd CruxAGI-AVI-Advanced-Virtual-Intelligence
+
+# Copy all files
+# Add files to git
+git add .
+git add .github/ --force
+
+# Commit and push
+git commit -m "🚀 CruxAGI-AVI: Enterprise AI with 70% performance lift"
+git push origin main
+
+Credentials:
+Username: dkidwell@dgisupply.com  
+Token: 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
+
+FILES TO INCLUDE:
+✅ Dockerfile (production-ready)
+✅ .github/workflows/ (CI/CD pipeline)
+✅ docker-compose.production.yml
+✅ deployment/kubernetes.yml
+✅ README.md (complete documentation)
+✅ shared/schema.ts (database schema)
+✅ server/ (complete backend)
+✅ client/ (React frontend)
+✅ prometheus.yml (monitoring)
+✅ All configuration files
