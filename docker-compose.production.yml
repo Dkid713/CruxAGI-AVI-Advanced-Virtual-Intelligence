@@ -1,74 +1,37 @@
-version: "3.9"
-
 services:
-  athena:
-    image: ghcr.io/your-username/athena-agi:latest
-    ports:
-      - "5000:5000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=${DATABASE_URL}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    depends_on:
-      - postgres
-      - redis
+  compression:
+    build: ./services/compression
+    ports: ["5001:5000"]
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '4.0'
-          memory: 16G
-        reservations:
-          cpus: '2.0'
-          memory: 8G
+
+  avi:
+    build: ./services/avi-runtime
+    ports: ["5002:5000"]
+    depends_on: [compression]
+    restart: unless-stopped
+
+  aap:
+    build: ./services/aap-gateway
+    ports: ["5003:5000"]
+    depends_on: [avi]
+    restart: unless-stopped
 
   postgres:
-    image: postgres:15-alpine
+    image: postgres:15
     environment:
-      POSTGRES_USER: athena
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: athena_production
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: crux
+      POSTGRES_PASSWORD: cruxagi
+      POSTGRES_DB: cruxdb
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    ports: ["5432:5432"]
     restart: unless-stopped
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    restart: unless-stopped
-    command: redis-server --appendonly yes
 
   prometheus:
-    image: prom/prometheus:latest
-    ports:
-      - "9090:9090"
+    image: prom/prometheus:v2.54.0
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    restart: unless-stopped
-
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - "3000:3000"
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
-    volumes:
-      - grafana_data:/var/lib/grafana
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports: ["9090:9090"]
     restart: unless-stopped
 
 volumes:
-  postgres_data:
-  redis_data:
-  prometheus_data:
-  grafana_data:
-
-networks:
-  default:
-    driver: bridge
+  pgdata:
