@@ -6,7 +6,7 @@
 echo "🚀 SYNCING CRUXAGI-AVI TO GITHUB"
 echo "================================="
 echo 
-echo "Repository: https://github.com/Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence"
+echo "Repository: https://github.com/dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence"
 echo "Status: Repository initialized and ready"
 echo
 echo "📦 Enterprise files to upload:"
@@ -20,7 +20,7 @@ echo "   ✅ Prometheus monitoring stack"
 echo "   ✅ Complete documentation"
 echo
 echo "🔄 Ready for file transfer to GitHub repository..."
-echo "   Repository URL: git@github.com:Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence.git"
-echo "   HTTPS URL: https://github.com/Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence.git"
+echo "   Repository URL: git@github.com:dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence.git"
+echo "   HTTPS URL: https://github.com/dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence.git"
 echo
 echo "✅ All enterprise features prepared for GitHub deployment!"
