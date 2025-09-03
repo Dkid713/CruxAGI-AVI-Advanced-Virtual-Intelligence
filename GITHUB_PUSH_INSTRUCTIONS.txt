@@ -7,7 +7,7 @@ OPTION 1: Using GitHub CLI (Recommended)
 ----------------------------------------
 cd ~/cruxagi
 gh auth login
-gh repo clone Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence
+gh repo clone dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence
 cd CruxAGI-AVI-Advanced-Virtual-Intelligence
 
 # Copy all files from Replit workspace
