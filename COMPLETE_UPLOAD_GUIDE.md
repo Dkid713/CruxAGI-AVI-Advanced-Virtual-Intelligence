@@ -1,7 +1,7 @@
 # 🚀 Complete CruxAGI-AVI GitHub Upload Guide
 
 ## Your Repository is Ready!
-✅ **GitHub Repository**: https://github.com/Dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence
+✅ **GitHub Repository**: https://github.com/dkid713/CruxAGI-AVI-Advanced-Virtual-Intelligence
 ✅ **Status**: Initialized with README.md
 ✅ **Ready**: For complete enterprise file upload
 
